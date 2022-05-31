@@ -1,19 +1,25 @@
+/* eslint-disable camelcase */
 const router = require('express').Router();
 const {
-  Post, User,
+  Post, User, Liked,
 } = require('../db/models');
 
-router.get('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
+  console.log('asasdfasdfasd');
   if (req.session.userid) {
-    // console.log(reqid);
-    // const currentPost = await Post.findOne({ where: { id: reqid }, raw: true });
-    // console.log('-------------------------------->', currentPost.user_id);
-    // if (currentPost.user_id === req.session.userid) {
-    //   return res.render('partials/updatePost', currentPost);
-    // }
-    // res.send(401);
-    res.render('partials/likedPosts');
+    const post_id = req.params.id;
+    const user_id = req.session.userid;
+    const checkLiked = await Liked.findOne({ where: { user_id, post_id } });
+    if (checkLiked) {
+      return res.send(500);
+    }
+    const newLiked = await Liked.create({
+      user_id,
+      post_id,
+    });
+    return res.send(200);
   }
+  res.send(401);
 });
 
 module.exports = router;

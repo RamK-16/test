@@ -14,6 +14,22 @@ if (allPosts) {
         // window.location.reload();
       }
     }
+    if (event.target.id === 'like') {
+      event.preventDefault();
+      const id = event.target.parentNode.dataset.postid;
+      const response = await fetch(`/likedPosts/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        const post = document.querySelector(`#aa${id}`);
+        post.querySelector('#like').innerText = `liked`;
+         
+        // window.location.reload();
+      }
+    }
   });
 }
 

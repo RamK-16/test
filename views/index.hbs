@@ -9,15 +9,14 @@
       <h5 class="card-title">Post - {{this.id}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">-------</h6>
       <p class="card-text">{{this.title}}</p>
-      {{!-- {{#if user}} --}}
+      
       {{#if (checkUser ../user.id this.user_id)}}
       <a id="update" class="card-link" href="/updatePost/{{this.id}}">update post</a>
-      <a id="del"   class="card-link">delete post</a>
+      <a id="del" class="card-link">delete post</a>
+      {{else}}
+      <a id="like" class="card-link" href="/likedPost/{{this.id}}">like {{this.userLike.length}}</a>
       {{/if}}
-      {{!-- {{else}}
-      <div> not registration, not delete for you</div>
-      {{/if}}  --}}
-      {{!-- <a href="#" class="card-link">Another link</a> --}}
+      
     </div>
   </div>
   {{/each}}
