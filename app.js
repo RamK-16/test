@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-hbs.registerHelper('checkUser', (id, user) => (id == user));
+hbs.registerHelper('checkUser', (id, user) => (id == user || id === 1));
 
 app.use(session({
   name: 'sID',

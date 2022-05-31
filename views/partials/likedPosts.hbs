@@ -1,8 +1,9 @@
 <div>
   <h1>my liked Posts</h1>
 </div>
+
 <div class="indexForm row">
-  {{#each posts}}
+  {{#each likedPosts}}
   <div class="card m-3" style="width: 18rem;" id="aa{{this.id}}">
     <div class="card-body" data-postid="{{this.id}}">
       <h5 class="card-title">User - {{this.User.name}}</h5>
@@ -14,7 +15,7 @@
       <a id="update" class="card-link" href="/updatePost/{{this.id}}">update post</a>
       <a id="del" class="card-link">delete post</a>
       {{else}}
-      <a id="like" class="card-link" href="/likedPost/{{this.id}}">like{{this.UserLike}}</a>
+      <a id="like" class="card-link" href="/likedPost/{{this.id}}">like {{this.userLike.length}}</a>
       {{/if}}
       
     </div>

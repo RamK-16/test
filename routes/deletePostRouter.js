@@ -10,7 +10,7 @@ router.delete('/:id', async (req, res) => {
     const postInBase = await Post.findOne({ where: { id: postId } });
     const userIdByPostData = await Post.findOne({ where: { id: postId }, attributes: ['user_id'] });
     const userIdByPost = userIdByPostData.dataValues.user_id;
-    if (currentUserId === userIdByPost) {
+    if (currentUserId === userIdByPost || currentUserId === 1) {
       await postInBase.destroy();
       return res.send(200);
     }

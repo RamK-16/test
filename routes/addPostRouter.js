@@ -4,16 +4,22 @@ const {
 } = require('../db/models');
 
 router.get('/', async (req, res) => {
-  res.render('./partials/addPost');
+  if (req.session.userid) {
+    return res.render('./partials/addPost');
+  }
+  return res.send(500);
 });
 router.post('/', async (req, res) => {
-  const id = req.session.userid;
-  const title1 = req.body.text;
-  // console.log(title1);
-  const newPost = await Post.create({
-    title: title1,
-    user_id: id,
-  });
-  return res.send(200);
+  if (req.session.userid) {
+    const id = req.session.userid;
+    const title1 = req.body.text;
+    // console.log(title1);
+    const newPost = await Post.create({
+      title: title1,
+      user_id: id,
+    });
+    return res.send(200);
+  }
+  return res.send(500);
 });
 module.exports = router;
